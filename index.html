@@ -1,235 +1,672 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#080817">
-  <title>NEON XO</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Body - جسمي</title>
+
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <div class="ambient ambient-one"></div>
-  <div class="ambient ambient-two"></div>
 
-  <main class="app">
-    <header class="topbar">
-      <div class="logo"><span>NEON</span> XO</div>
-      <div class="online-status">
-        <span id="connectionDot"></span>
-        <span id="connectionText">جارٍ الاتصال...</span>
-      </div>
-    </header>
+    <!-- الخلفية -->
+    <div class="background"></div>
 
-    <section id="homeScreen" class="screen active">
-      <div class="hero">
-        <div class="hero-icon">✕ <span>○</span></div>
-        <p class="eyebrow">THE ULTIMATE XO EXPERIENCE</p>
-        <h1>اللعب أصبح <span>أكثر إثارة</span></h1>
-        <p class="subtitle">اختار طريقة اللعب وابدأ التحدي.</p>
-      </div>
 
-      <div class="menu-cards">
-        <button class="menu-card local-card" id="localModeBtn">
-          <span class="card-icon">⚡</span>
-          <span class="card-title">اللعب المحلي</span>
-          <span class="card-desc">العب مع صاحبك على نفس الجهاز، بدون إنترنت.</span>
-          <span class="card-action">ابدأ اللعب ←</span>
-          <span class="offline-label">يعمل دون إنترنت</span>
+    <!-- شاشة التحميل / خطأ الاتصال -->
+    <main id="statusPage" class="page active">
+
+        <section class="auth-container">
+
+            <div class="auth-logo">
+                <span>MY</span> BODY
+            </div>
+
+            <p class="auth-description" id="statusText" style="text-align:center;margin-bottom:10px;">
+                جاري التحميل...
+            </p>
+
+            <button
+                class="glow-button auth-button"
+                id="statusRetryBtn"
+                type="button"
+                hidden
+            >
+                إعادة المحاولة
+            </button>
+
+        </section>
+
+    </main>
+
+
+    <!-- صفحة تسجيل الدخول / إنشاء حساب -->
+    <main id="authPage" class="page">
+
+        <section class="auth-container">
+
+            <div class="auth-logo">
+                <span>MY</span> BODY
+            </div>
+
+            <p class="small-title">
+                ابدأ رحلتك
+            </p>
+
+            <h1 id="authTitle">
+                إنشاء حساب
+            </h1>
+
+            <p class="auth-description">
+                أنشئ حسابك وابدأ رحلتك الرياضية.
+            </p>
+
+            <div class="input-group" id="nameGroup">
+                <label for="authName">الاسم</label>
+                <input
+                    type="text"
+                    id="authName"
+                    placeholder="اكتب اسمك"
+                    autocomplete="name"
+                >
+            </div>
+
+            <div class="input-group" id="emailGroup">
+                <label for="authEmail">البريد الإلكتروني</label>
+                <input
+                    type="email"
+                    id="authEmail"
+                    placeholder="example@gmail.com"
+                    autocomplete="email"
+                >
+            </div>
+
+            <div class="input-group">
+                <label for="authPassword">كلمة المرور</label>
+                <input
+                    type="password"
+                    id="authPassword"
+                    placeholder="••••••••"
+                    autocomplete="new-password"
+                >
+            </div>
+
+            <button
+                class="glow-button auth-button"
+                id="authButton"
+                type="button"
+            >
+                إنشاء الحساب
+            </button>
+
+            <p class="auth-error" id="authMessage"></p>
+
+            <button
+                class="auth-switch"
+                id="authSwitch"
+                type="button"
+            >
+                عندك حساب بالفعل؟ تسجيل الدخول
+            </button>
+
+        </section>
+
+    </main>
+
+
+    <!-- صفحة بيانات الجسم -->
+    <main id="bodyDataPage" class="page">
+
+        <section class="auth-container">
+
+            <div class="auth-logo">
+                <span>MY</span> BODY
+            </div>
+
+            <p class="small-title">
+                بياناتك الشخصية
+            </p>
+
+            <h1 id="bodyDataTitle">
+                أخبرنا عن جسمك
+            </h1>
+
+            <p class="auth-description">
+                أدخل بياناتك ليتم حفظها في حسابك.
+            </p>
+
+            <div class="input-group">
+                <label for="heightInput">الطول</label>
+                <input
+                    type="number"
+                    id="heightInput"
+                    placeholder="مثال: 140"
+                    min="50"
+                    max="250"
+                >
+            </div>
+
+            <div class="input-group">
+                <label for="weightInput">الوزن</label>
+                <input
+                    type="number"
+                    id="weightInput"
+                    placeholder="مثال: 50"
+                    min="10"
+                    max="500"
+                >
+            </div>
+
+            <div class="input-group">
+                <label for="ageInput">العمر</label>
+                <input
+                    type="number"
+                    id="ageInput"
+                    placeholder="مثال: 14"
+                    min="1"
+                    max="120"
+                >
+            </div>
+
+            <button
+                class="glow-button auth-button"
+                id="saveBodyDataBtn"
+                type="button"
+            >
+                حفظ البيانات
+            </button>
+
+            <p class="auth-error" id="bodyDataMessage"></p>
+
+        </section>
+
+    </main>
+
+
+    <!-- الصفحة الرئيسية -->
+    <main id="homePage" class="page">
+
+        <header class="top-bar">
+
+            <!-- البروفايل -->
+            <div class="user-profile">
+
+                <button
+                    class="profile-image-button"
+                    id="profileImageButton"
+                    type="button"
+                    aria-label="صورة البروفايل"
+                >
+
+                    <div class="profile-image">
+
+                        <img
+                            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23e5e5e5'/%3E%3Ccircle cx='50' cy='34' r='17' fill='%23888888'/%3E%3Cpath d='M18 91c3-22 16-34 32-34s29 12 32 34' fill='%23888888'/%3E%3C/svg%3E"
+                            alt="صورة البروفايل"
+                            id="profileImage"
+                        >
+
+                    </div>
+
+                </button>
+
+                <div class="user-text">
+
+                    <span class="welcome-text">
+                        أهلاً بك
+                    </span>
+
+                    <h2 id="userName">
+                        ...
+                    </h2>
+
+                </div>
+
+            </div>
+
+            <div class="logo">
+                <span>MY</span> BODY
+            </div>
+
+        </header>
+
+
+        <!-- نافذة تعديل صورة البروفايل -->
+        <div
+            class="profile-modal"
+            id="profileModal"
+            hidden
+        >
+
+            <div class="profile-modal-content">
+
+                <button
+                    class="profile-modal-close"
+                    id="closeProfileModal"
+                    type="button"
+                    aria-label="إغلاق"
+                >
+                    ×
+                </button>
+
+                <h2 class="profile-modal-title">
+                    صورة البروفايل
+                </h2>
+
+                <div class="profile-preview">
+
+                    <img
+                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23e5e5e5'/%3E%3Ccircle cx='50' cy='34' r='17' fill='%23888888'/%3E%3Cpath d='M18 91c3-22 16-34 32-34s29 12 32 34' fill='%23888888'/%3E%3C/svg%3E"
+                        alt="معاينة صورة البروفايل"
+                        id="profilePreview"
+                    >
+
+                </div>
+
+                <label
+                    for="profileImageInput"
+                    class="profile-upload-button"
+                >
+                    تغيير صورة البروفايل
+                </label>
+
+                <input
+                    type="file"
+                    id="profileImageInput"
+                    accept="image/*"
+                    hidden
+                >
+
+                <button
+                    class="logout-button"
+                    id="logoutBtn"
+                    type="button"
+                >
+                    تسجيل الخروج
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <section class="home-content">
+
+            <div class="hero-text">
+
+                <p class="small-title">
+                    جاهز تبدأ؟
+                </p>
+
+                <h1>
+                    ابنِ جسمك<br>
+                    بطريقتك الخاصة
+                </h1>
+
+                <p class="description">
+                    اختر نوع التمرين المناسب لك،
+                    وحدد وقت التمرين ودع My Body
+                    ينظم التمرين المناسب لك.
+                </p>
+
+            </div>
+
+
+            <!-- بيانات الجسم -->
+            <section class="body-info">
+
+                <div class="info-card">
+                    <span class="info-label">الوزن</span>
+                    <strong id="userWeight">--</strong>
+                    <span class="unit">كجم</span>
+                </div>
+
+                <div class="info-card">
+                    <span class="info-label">الطول</span>
+                    <strong id="userHeight">--</strong>
+                    <span class="unit">سم</span>
+                </div>
+
+                <div class="info-card">
+                    <span class="info-label">العمر</span>
+                    <strong id="userAge">--</strong>
+                    <span class="unit">سنة</span>
+                </div>
+
+            </section>
+
+
+            <!-- تعديل البيانات -->
+            <button
+                class="glow-button edit-body-button"
+                id="editBodyDataBtn"
+                type="button"
+            >
+                ⚡ تعديل بياناتي
+            </button>
+
+
+            <!-- نوع التمرين -->
+            <div class="workout-type-buttons">
+
+                <button
+                    class="glow-button main-button workout-type-button"
+                    id="startWorkoutBtn"
+                    type="button"
+                >
+                    <span>💪 بناء العضلات</span>
+                    <span class="button-arrow">←</span>
+                </button>
+
+                <button
+                    class="glow-button main-button workout-type-button"
+                    id="weightLossBtn"
+                    type="button"
+                >
+                    <span>🔥 فقدان الوزن</span>
+                    <span class="button-arrow">←</span>
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- صفحة اختيار الجزء -->
+    <main id="bodyPage" class="page">
+
+        <header class="page-header">
+
+            <button
+                class="back-button"
+                id="backToHome"
+                type="button"
+            >
+                →
+            </button>
+
+            <h1>اختر منطقة الجسم</h1>
+
+        </header>
+
+        <section class="body-selection">
+
+            <button
+                class="body-choice upper-body"
+                id="upperBodyBtn"
+                type="button"
+            >
+                <div class="body-icon">🏋️</div>
+                <h2>الجزء العلوي</h2>
+                <p>البطن، الصدر، الكتف</p>
+            </button>
+
+            <button
+                class="body-choice lower-body"
+                id="lowerBodyBtn"
+                type="button"
+            >
+                <div class="body-icon">🦵</div>
+                <h2>الجزء السفلي</h2>
+                <p>الفخذ والسمانة</p>
+            </button>
+
+        </section>
+
+    </main>
+
+
+    <!-- صفحة اختيار العضلات -->
+    <main id="musclesPage" class="page">
+
+        <header class="page-header">
+
+            <button
+                class="back-button"
+                id="backToBody"
+                type="button"
+            >
+                →
+            </button>
+
+            <h1 id="musclesTitle">اختر العضلات</h1>
+
+        </header>
+
+        <section
+            class="muscles-container"
+            id="musclesContainer"
+        ></section>
+
+        <div class="selected-counter">
+            <span>العضلات المختارة</span>
+            <strong id="selectedCount">0</strong>
+        </div>
+
+        <button
+            class="glow-button"
+            id="continueToTime"
+            type="button"
+        >
+            التالي ←
         </button>
 
-        <button class="menu-card friends-card" id="friendsModeBtn">
-          <span class="card-icon">♧</span>
-          <span class="card-title">العب مع أصدقائك</span>
-          <span class="card-desc">أنشئ غرفة أو انضم إلى صديقك من جهاز آخر.</span>
-          <span class="card-action">دخول ←</span>
-          <span class="online-label">يتطلب الإنترنت</span>
-        </button>
-      </div>
-    </section>
+    </main>
 
-    <section id="sizeScreen" class="screen">
-      <button class="back-btn" data-back="homeScreen">→ رجوع</button>
-      <div class="section-heading">
-        <p class="eyebrow">CHOOSE YOUR CHALLENGE</p>
-        <h2>اختار حجم اللوحة</h2>
-        <p class="subtitle">كل ما اللوحة تكبر، التحدي يزيد.</p>
-      </div>
 
-      <div class="size-options">
-        <button class="size-card selected" data-size="3">
-          <span class="size-number">3×3</span>
-          <span>كلاسيكي</span>
-          <span class="size-detail">3 علامات للفوز</span>
-        </button>
-        <button class="size-card" data-size="4">
-          <span class="size-number">4×4</span>
-          <span>متوسط</span>
-          <span class="size-detail">4 علامات للفوز</span>
-        </button>
-        <button class="size-card" data-size="5">
-          <span class="size-number">5×5</span>
-          <span>متقدم</span>
-          <span class="size-detail">4 علامات للفوز</span>
-        </button>
-        <button class="size-card" data-size="6">
-          <span class="size-number">6×6</span>
-          <span>خبير</span>
-          <span class="size-detail">4 علامات للفوز</span>
-        </button>
-      </div>
+    <!-- صفحة تحديد الوقت -->
+    <main id="timePage" class="page">
 
-      <button class="primary-btn" id="startLocalBtn">ابدأ المباراة ←</button>
-    </section>
+        <header class="page-header">
 
-    <!-- خيارات اللعب مع الأصدقاء -->
-    <section id="friendsScreen" class="screen">
-      <button class="back-btn" data-back="homeScreen">→ رجوع</button>
-      <div class="section-heading">
-        <p class="eyebrow">PLAY WITH FRIENDS</p>
-        <h2>العب مع أصدقائك</h2>
-        <p class="subtitle">اختار إنشاء غرفة جديدة أو الدخول بكود صديقك.</p>
-      </div>
+            <button
+                class="back-button"
+                id="backToMuscles"
+                type="button"
+            >
+                →
+            </button>
 
-      <div id="offlineNotice" class="notice hidden">
-        <h3>الاتصال غير متاح</h3>
-        <p>تأكد من اتصال الإنترنت ثم حاول مرة أخرى.</p>
-        <button class="primary-btn" id="retryInternetBtn">إعادة المحاولة</button>
-      </div>
+            <h1>حدد وقت التمرين</h1>
 
-      <div id="friendsSetup" class="friends-panel">
-        <button class="primary-btn" id="openCreateRoomBtn">＋ إنشاء غرفة جديدة</button>
-        <button class="secondary-btn full-btn" id="openJoinRoomBtn">⇦ دخول بكود غرفة</button>
-      </div>
+        </header>
 
-      <div id="createRoomPanel" class="friends-panel hidden">
-        <h3>إعداد الغرفة</h3>
-        <p>اختار حجم اللوحة. صديقك هيلعب بنفس الحجم تلقائيًا.</p>
-        <div class="size-options friend-size-options">
-          <button class="size-card friend-size-card selected" data-friend-size="3">
-            <span class="size-number">3×3</span>
-            <span>كلاسيكي</span>
-          </button>
-          <button class="size-card friend-size-card" data-friend-size="4">
-            <span class="size-number">4×4</span>
-            <span>متوسط</span>
-          </button>
-          <button class="size-card friend-size-card" data-friend-size="5">
-            <span class="size-number">5×5</span>
-            <span>متقدم</span>
-          </button>
-          <button class="size-card friend-size-card" data-friend-size="6">
-            <span class="size-number">6×6</span>
-            <span>خبير</span>
-          </button>
-        </div>
-        <button class="primary-btn" id="createRoomBtn">إنشاء الغرفة</button>
-        <button class="secondary-btn full-btn" data-friends-back>رجوع</button>
-      </div>
+        <section class="time-content">
 
-      <div id="joinRoomPanel" class="friends-panel hidden">
-        <h3>دخول غرفة</h3>
-        <p>اكتب كود الدعوة الذي أرسله لك صديقك.</p>
-        <label for="joinRoomCode">كود الغرفة</label>
-        <input id="joinRoomCode" class="room-input" maxlength="6"
-               autocomplete="off" placeholder="مثال: A7K2PQ"
-               dir="ltr">
-        <button class="primary-btn" id="confirmJoinBtn">دخول الغرفة</button>
-        <button class="secondary-btn full-btn" data-friends-back>رجوع</button>
-      </div>
+            <p class="time-description">
+                اختر المدة الكاملة للتمرين،
+                وسيتم توزيع الوقت تلقائياً
+                على جميع التمارين التي اخترتها.
+            </p>
 
-      <div id="roomWaitingPanel" class="friends-panel hidden">
-        <div class="friend-symbol">⌘</div>
-        <h3 id="roomWaitingTitle">غرفتك جاهزة!</h3>
-        <p id="roomWaitingMessage">أرسل كود الغرفة إلى صديقك.</p>
-        <div class="room-code" id="roomCodeDisplay">------</div>
-        <button class="primary-btn" id="copyRoomCodeBtn">نسخ كود الدعوة</button>
-        <button class="secondary-btn full-btn" id="cancelRoomBtn">العودة للرئيسية</button>
-      </div>
-    </section>
+            <div class="time-selector">
 
-    <section id="gameScreen" class="screen game-screen">
-      <div class="game-inner">
-        <div class="game-topline">
-          <button class="back-btn" id="leaveGameBtn">✕ خروج</button>
-          <div class="game-mode-label" id="gameModeLabel">اللعب المحلي</div>
-        </div>
+                <button class="time-option" data-time="5" type="button">5 دقائق</button>
 
-        <div id="roomGameInfo" class="room-game-info hidden">
-          كود الغرفة: <strong id="gameRoomCode"></strong>
-          <button id="copyGameRoomCodeBtn" class="copy-small-btn">نسخ</button>
-        </div>
+                <button class="time-option active-time" data-time="10" type="button">10 دقائق</button>
 
-        <div class="game-heading">
-          <p class="eyebrow">YOUR TURN TO SHINE</p>
-          <h2 id="turnHeading">دور اللاعب <span>X</span></h2>
-          <p class="subtitle" id="turnSubheading">اختار مربعك بعناية</p>
-        </div>
+                <button class="time-option" data-time="15" type="button">15 دقيقة</button>
 
-        <div class="players">
-          <div class="player-card active-player" id="playerXCard">
-            <span class="player-mark x-mark">X</span>
-            <span class="player-name" id="playerXName">اللاعب الأول</span>
-            <span class="player-state" id="playerXState">دوره الآن</span>
-          </div>
-          <div class="versus">VS</div>
-          <div class="player-card" id="playerOCard">
-            <span class="player-mark o-mark">O</span>
-            <span class="player-name" id="playerOName">اللاعب الثاني</span>
-            <span class="player-state" id="playerOState">ينتظر دوره</span>
-          </div>
-        </div>
+                <button class="time-option" data-time="20" type="button">20 دقيقة</button>
 
-        <div class="board-wrap">
-          <div id="gameBoard" class="game-board" aria-label="لوحة لعبة إكس أو"></div>
-          <svg id="winSvg" class="win-svg" aria-hidden="true">
-            <line id="winLine" x1="0" y1="0" x2="0" y2="0"></line>
-          </svg>
-        </div>
+                <button class="time-option" data-time="30" type="button">30 دقيقة</button>
 
-        <div class="game-footer">
-          <div class="score-box">
-            <span>انتصارات X</span>
-            <strong id="scoreX">0</strong>
-          </div>
-          <div class="score-box draw-box">
-            <span>تعادل</span>
-            <strong id="scoreDraw">0</strong>
-          </div>
-          <div class="score-box">
-            <span>انتصارات O</span>
-            <strong id="scoreO">0</strong>
-          </div>
-        </div>
+                <button class="time-option" data-time="45" type="button">45 دقيقة</button>
 
-        <div class="game-actions">
-          <button class="secondary-btn" id="restartBtn">↻ مباراة جديدة</button>
-          <button class="secondary-btn" id="changeSizeBtn">▦ تغيير الحجم</button>
-        </div>
-        <p class="flip-hint" id="flipHint">الشاشة تنقلب مع تبديل الدور لمواجهة اللاعب التالي</p>
-      </div>
-    </section>
+                <button class="time-option" data-time="60" type="button">60 دقيقة</button>
 
-    <section id="resultScreen" class="screen">
-      <div class="result-content">
-        <div class="result-icon" id="resultIcon">🏆</div>
-        <p class="eyebrow">GAME COMPLETED</p>
-        <h2 id="resultTitle">انتهت المباراة</h2>
-        <p class="subtitle" id="resultMessage">مباراة رائعة!</p>
-        <button class="primary-btn" id="playAgainBtn">العب مرة أخرى ↻</button>
-        <button class="secondary-btn full-btn" id="resultHomeBtn">الصفحة الرئيسية</button>
-      </div>
-    </section>
+            </div>
 
-    <footer class="app-footer">NEON XO <span>•</span> LET THE GAME BEGIN</footer>
-  </main>
+            <div class="time-summary">
+                <span>مدة التمرين:</span>
+                <strong id="selectedTimeDisplay">10 دقائق</strong>
+            </div>
 
-  <div id="toast" class="toast" role="status"></div>
+            <button
+                class="glow-button main-button"
+                id="startExercisesBtn"
+                type="button"
+            >
+                ابدأ التمرين 🔥
+            </button>
 
-  <!-- Firebase SDK باستخدام script tags -->
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-  <script src="script.js"></script>
+        </section>
+
+    </main>
+
+
+    <!-- صفحة التمرين -->
+    <main id="exercisePage" class="page">
+
+        <header class="exercise-header">
+
+            <div class="exercise-number">
+                تمرين
+                <span id="currentExerciseNumber">1</span>
+                /
+                <span id="totalExercises">1</span>
+            </div>
+
+            <div class="workout-total-time">
+                الوقت المتبقي
+                <span id="totalTimeRemaining">10:00</span>
+            </div>
+
+        </header>
+
+        <section class="exercise-content">
+
+            <p class="current-muscle" id="currentMuscle">
+                البطن العلوية
+            </p>
+
+            <h1 class="exercise-name" id="exerciseName">
+                Crunches
+            </h1>
+
+            <div class="exercise-time-box">
+                <span class="time-title">وقت التنفيذ</span>
+                <strong id="exerciseTimer">01:00</strong>
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-bar" id="exerciseProgress"></div>
+            </div>
+
+            <div class="exercise-progress-text">
+                <span>التقدم</span>
+                <strong id="progressPercentage">0%</strong>
+            </div>
+
+            <div class="exercise-controls">
+
+                <button
+                    class="control-button secondary"
+                    id="skipExerciseBtn"
+                    type="button"
+                >
+                    تخطي
+                </button>
+
+                <button
+                    class="control-button pause"
+                    id="pauseExerciseBtn"
+                    type="button"
+                >
+                    إيقاف مؤقت
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- صفحة الراحة (15 ثانية) - موجودة لكن غير موصولة بكود حاليًا -->
+    <main id="restPage" class="page">
+
+        <section class="exercise-content rest-content">
+
+            <p class="small-title glowing-text">
+                خذ أنفاسك ☕
+            </p>
+
+            <h1 class="exercise-name">
+                وقت الراحة
+            </h1>
+
+            <div class="exercise-time-box rest-glow">
+                <span class="time-title">الاستعداد للتمرين التالي</span>
+                <strong id="restTimer" class="glowing-timer">00:15</strong>
+            </div>
+
+            <p class="next-exercise-hint">
+                التمرين القادم: <span id="nextExerciseName">--</span>
+            </p>
+
+            <div class="exercise-controls">
+                <button
+                    class="glow-button auth-button"
+                    id="skipRestBtn"
+                    type="button"
+                >
+                    تخطي الراحة ⚡
+                </button>
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- صفحة الانتهاء -->
+    <main id="completePage" class="page">
+
+        <section class="complete-content">
+
+            <div class="complete-icon">✓</div>
+
+            <p>أحسنت!</p>
+
+            <h1>أنهيت تمرينك بنجاح 🔥</h1>
+
+            <div class="workout-summary">
+
+                <div>
+                    <span>مدة التمرين</span>
+                    <strong id="finalTime">10 دقائق</strong>
+                </div>
+
+                <div>
+                    <span>عدد التمارين</span>
+                    <strong id="finalExercises">0</strong>
+                </div>
+
+            </div>
+
+            <button
+                class="glow-button main-button"
+                id="backToStart"
+                type="button"
+            >
+                الصفحة الرئيسية
+            </button>
+
+        </section>
+
+    </main>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="script.js"></script>
+
 </body>
+
 </html>
